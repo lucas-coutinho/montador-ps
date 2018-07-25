@@ -42,6 +42,7 @@ public class Macro {
             /* testa ateh o final do arquivo*/
             while(read != null)
             {
+                //System.out.println("oi");
                 if(read.contains("mcdef"))
                 {
                     String[] aux = new String[2];
@@ -53,8 +54,9 @@ public class Macro {
                      * a macro) e parametros formais apara a tabela de parametros*/
                     
                     aux = read.split("mcdef");
-                    simbolo = aux[0];
-                    parametros = aux[1];
+                    simbolo = aux[0].trim();
+                    parametros = aux[1].trim();
+                    System.out.println(aux[0] + " " + aux[1]);
                     Integer j = new Integer(0);
                     for(int i = 0;;)
                     {
@@ -69,22 +71,23 @@ public class Macro {
                         
                         j += 1;      
                     }
+                    
                     simbolo = simbolo.trim();
                     
                     /*valor da chamada esta atrelado ao conjunto de parametros*/
                     mapaDeParametros.put(simbolo, map);
                     read = file.readLine();
                     List<String> defMacro = new ArrayList<>();
-                    
-                    while(read != "mcend")
+                    /*fazer teste se ha mcend, para impossibilitar a geracao do codigo*/
+                    while(!"mcend".equals(read))
                     {
                        defMacro.add(read);
                        read = file.readLine();
                     }
-                   
                     
-                    tabelaDefMacro.put(read, defMacro);
                     
+                    tabelaDefMacro.put(simbolo, defMacro);
+                    for(String s7:tabelaDefMacro.get(simbolo)) System.out.println(s7);
                 }
                 else{read = file.readLine();}
             }
@@ -113,40 +116,53 @@ public class Macro {
         */
             String read;
             read = file.readLine();
-            while(read != null)
+            while(!read.contains("mcdef"))
             {
+               // System.out.println("oi");
                 /*criando codigo fonte intermediario*/
-                intermediario.add(read);
                 
+                
+                //for(String s : mapaDeParametros.keySet()) System.out.println(s);
                 /*verifica se uma macro eh chamada na linha atual*/
                 for(String s: mapaDeParametros.keySet())
                 {
+                   
                     if(read.contains(s))
                     {
+                        
                         String[] aux = new String[2];
                         Map<String,String> param = new HashMap<>();
                         
                         aux = read.split(" ");
+                        aux[0] = aux[0].trim();
+                        aux[1] = aux[1].trim();
                         
+                        System.out.println(aux[0] + " " + aux[1]);
                         int i = 0;
                         int j = 0;
                         
                         while(true)
                         {
                             String s2;
-                            if(aux[1].indexOf(",") != -1)
+                            System.out.println(aux[1].indexOf(',',i));
+                            if(aux[1].indexOf(',',i) != -1)
                             {
-                                s2 = aux[1].substring(i,',' );
+                                s2 = aux[1].substring(i,aux[1].indexOf(',',i) );
+                                System.out.println(s2);
                                 param.put(mapaDeParametros.get(s).get(j),s2);
-                                i = aux[1].indexOf(",") + 1;
+                                i = aux[1].indexOf(',',i) + 1;
+                               System.out.println(i);
                             }
                             else 
                             {
                                 s2 = aux[1].substring(i);
+                                System.out.println(s2);
                                 param.put(mapaDeParametros.get(s).get(j),s2);
                                 break;
                             }
+                            j++;
                         }
+                       // System.out.println("oi");
                         /*acima foi feita a indentificacao dos parametros formais
                         *para os reais, agora iremos exapandir a chamada da macro*/
                         
@@ -154,28 +170,43 @@ public class Macro {
                          *for each passando por todas os parametros formais, e substituido
                          *eles pelos reais*/
                         List<String> s4 = new ArrayList<>();
-                        for(String s3: param.keySet())
+                        
+                        for(String s5:tabelaDefMacro.get(aux[0]))
                         {
-                            
-                            for(String s5:tabelaDefMacro.get(aux[0]))
+                            int flag = 0;
+                            for(String s3: param.keySet())
                             {
                                 String s6;
-                                s6 = s5.replaceFirst(s3, param.get(s3));
-                                s4.add(s6);
+                                if(s3.equals(s5.substring(1)))
+                                {
+                                    s6 = s5.replaceFirst(s3, param.get(s3));
+                                    s4.add(s6);
+                                    flag = 1;
+                                }
+                                
                                
                             }
+                            if(flag == 0) s4.add(s5);
+                                
                         }
                         intermediario.addAll(s4);
+                        read = file.readLine();
                     }
-                    
+                                
                 }
+                intermediario.add(read);
+                read = file.readLine();
                 
             }
-            
+            arq.close();
        }
        catch(IOException e){throw e;}
        
    }
-    
+    public List<String> getIntermediario()
+    {
+        return intermediario;
+    }
+            
     
 }
