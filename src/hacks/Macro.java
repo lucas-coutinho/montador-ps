@@ -116,87 +116,95 @@ public class Macro {
         */
             String read;
             read = file.readLine();
-            while(!read.contains("mcdef"))
+            while(read != null)
             {
                // System.out.println("oi");
                 /*criando codigo fonte intermediario*/
-                
+                if(read.contains("mcdef"))
+                {
+                    read = file.readLine();
+                    while(!read.equals("mcend"))read = file.readLine();
+                    read = file.readLine();
+                }
+                else
+                {
                 
                 //for(String s : mapaDeParametros.keySet()) System.out.println(s);
                 /*verifica se uma macro eh chamada na linha atual*/
-                for(String s: mapaDeParametros.keySet())
-                {
-                   
-                    if(read.contains(s))
+                    for(String s: mapaDeParametros.keySet())
                     {
-                        
-                        String[] aux = new String[2];
-                        Map<String,String> param = new HashMap<>();
-                        
-                        aux = read.split(" ");
-                        aux[0] = aux[0].trim();
-                        aux[1] = aux[1].trim();
-                        
-                        System.out.println(aux[0] + " " + aux[1]);
-                        int i = 0;
-                        int j = 0;
-                        
-                        while(true)
+
+                        if(read.contains(s))
                         {
-                            String s2;
-                            System.out.println(aux[1].indexOf(',',i));
-                            if(aux[1].indexOf(',',i) != -1)
+
+                            String[] aux = new String[2];
+                            Map<String,String> param = new HashMap<>();
+
+                            aux = read.split(" ");
+                            aux[0] = aux[0].trim();
+                            aux[1] = aux[1].trim();
+
+                            System.out.println(aux[0] + " " + aux[1]);
+                            int i = 0;
+                            int j = 0;
+
+                            while(true)
                             {
-                                s2 = aux[1].substring(i,aux[1].indexOf(',',i) );
-                                System.out.println(s2);
-                                param.put(mapaDeParametros.get(s).get(j),s2);
-                                i = aux[1].indexOf(',',i) + 1;
-                               System.out.println(i);
-                            }
-                            else 
-                            {
-                                s2 = aux[1].substring(i);
-                                System.out.println(s2);
-                                param.put(mapaDeParametros.get(s).get(j),s2);
-                                break;
-                            }
-                            j++;
-                        }
-                       // System.out.println("oi");
-                        /*acima foi feita a indentificacao dos parametros formais
-                        *para os reais, agora iremos exapandir a chamada da macro*/
-                        
-                        /*/ideia :
-                         *for each passando por todas os parametros formais, e substituido
-                         *eles pelos reais*/
-                        List<String> s4 = new ArrayList<>();
-                        
-                        for(String s5:tabelaDefMacro.get(aux[0]))
-                        {
-                            int flag = 0;
-                            for(String s3: param.keySet())
-                            {
-                                String s6;
-                                if(s3.equals(s5.substring(1)))
+                                String s2;
+                                System.out.println(aux[1].indexOf(',',i));
+                                if(aux[1].indexOf(',',i) != -1)
                                 {
-                                    s6 = s5.replaceFirst(s3, param.get(s3));
-                                    s4.add(s6);
-                                    flag = 1;
+                                    s2 = aux[1].substring(i,aux[1].indexOf(',',i) );
+                                    System.out.println(s2);
+                                    param.put(mapaDeParametros.get(s).get(j),s2);
+                                    i = aux[1].indexOf(',',i) + 1;
+                                   System.out.println(i);
                                 }
-                                
-                               
+                                else 
+                                {
+                                    s2 = aux[1].substring(i);
+                                    System.out.println(s2);
+                                    param.put(mapaDeParametros.get(s).get(j),s2);
+                                    break;
+                                }
+                                j++;
                             }
-                            if(flag == 0) s4.add(s5);
-                                
+                           // System.out.println("oi");
+                            /*acima foi feita a indentificacao dos parametros formais
+                            *para os reais, agora iremos exapandir a chamada da macro*/
+
+                            /*/ideia :
+                             *for each passando por todas os parametros formais, e substituido
+                             *eles pelos reais*/
+                            List<String> s4 = new ArrayList<>();
+
+                            for(String s5:tabelaDefMacro.get(aux[0]))
+                            {
+                                int flag = 0;
+                                for(String s3: param.keySet())
+                                {
+                                    String s6;
+                                    if(s3.equals(s5.substring(1)))
+                                    {
+                                        s6 = s5.replaceFirst(s3, param.get(s3));
+                                        s4.add(s6);
+                                        flag = 1;
+                                    }
+
+
+                                }
+                                if(flag == 0) s4.add(s5);
+
+                            }
+                            intermediario.addAll(s4);
+                            read = file.readLine();
                         }
-                        intermediario.addAll(s4);
-                        read = file.readLine();
+
                     }
-                                
-                }
-                intermediario.add(read);
-                read = file.readLine();
                 
+                    intermediario.add(read);
+                    read = file.readLine();
+                }
             }
             arq.close();
        }
