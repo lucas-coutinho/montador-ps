@@ -1,0 +1,16 @@
+EXTDEF LOOP
+@sdasjd
+(sum)
+D=M
+
+@sum
+
+M=D+M
+
+@i
+
+M=M+1
+
+@LOOP
+
+0;JMP

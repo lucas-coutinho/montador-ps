@@ -1,0 +1,54 @@
+EXTDEF sum
+INTUSE LOOP
+@i
+
+M=1
+
+@sum
+
+M=0
+(LOOP)
+
+@i
+
+D=M
+
+@50
+
+D=D-A
+
+inter 50,60
+@END
+
+D;JGT
+
+joao TESTE,KEY,PS
+@i
+
+D=M
+
+@sum
+
+M=D+M
+
+@i
+
+M=M+1
+
+@LOOP
+
+0;JMP
+
+inter mcdef l,a
+@l
+D=M
+@a
+A=A+1
+mcend
+joao mcdef l,a,b
+@l
+D=D-A
+@a
+@b
+0;JMP
+mcend
