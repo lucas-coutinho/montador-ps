@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/Macro.java</file>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/Hacks.java</file>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/Ligador.java</file>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/Montador.java</file>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/Carregador.java</file>
-            <file>file:/C:/Users/Lucas%20Freitas/Desktop/Hacks/src/hacks/TabelaDeSimbolos.java</file>
+            <file>file:/C:/Projetos/Ufpel/PS/TESTE/montador-ps/src/hacks/TabelaDeSimbolos.java</file>
+            <file>file:/C:/Projetos/Ufpel/PS/TESTE/montador-ps/src/hacks/Montador.java</file>
+            <file>file:/C:/Projetos/Ufpel/PS/TESTE/montador-ps/src/hacks/Hacks.java</file>
+            <file>file:/C:/Projetos/Ufpel/PS/TESTE/montador-ps/src/hacks/Interpretador.java</file>
         </group>
     </open-files>
 </project-private>

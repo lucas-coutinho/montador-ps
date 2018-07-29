@@ -87,7 +87,7 @@ public class Macro {
                     
                     
                     tabelaDefMacro.put(simbolo, defMacro);
-                    for(String s7:tabelaDefMacro.get(simbolo)) System.out.println(s7);
+                    for(String s7:tabelaDefMacro.get(simbolo)){} //System.out.println(s7);
                 }
                 else{read = file.readLine();}
             }

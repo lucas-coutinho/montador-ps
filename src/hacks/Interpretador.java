@@ -20,20 +20,55 @@ public class Interpretador {
     private int Reg_pc;
     private int Reg_A;
     private int Reg_data;
-    private int[] RAM;
+    private Integer[] RAM = new Integer[100];
     
     public Interpretador(String codObjeto) throws FileNotFoundException {
         this.codObjeto = codObjeto;
         interpreta(codObjeto);
     }
-    
-    public String lerLinha() throws FileNotFoundException {
+   
+   private void interpreta(String line) throws FileNotFoundException {
+       
        try {
            FileReader file = new FileReader(getCodObjeto());
            BufferedReader arq = new BufferedReader(file);
+           
+           line = arq.readLine();
       
-           setLine(arq.readLine());
-           return getLine(); 
+           while(line != null)
+           {
+                if(line.length() > 0 ) {
+                    System.out.println(line);
+                    
+                    /* Aqui começa o interpretador*/
+                    
+                    if("111".equals(line.substring(1, 3))) { // Indica que vai ser lido um valor para memória
+                        //RAM[this.Reg_A] = 0;
+                        switch(line.substring(4,10)){
+                            case "0111111":
+                                RAM[this.Reg_A] = 1;
+                                break;
+                            
+                            case "0101010":
+                                RAM[this.Reg_A] = 0;
+                                break;
+                            
+                            case "0111010":
+                                RAM[this.Reg_A] = -1;
+                                break;
+                            
+                            case "0001100":
+                                RAM[this.Reg_A] = Reg_data; 
+                        }
+                    }
+                    
+               
+                    
+                }
+                  
+   
+               line = arq.readLine();
+            } 
        }
        catch(FileNotFoundException e) {
            throw e;
@@ -41,27 +76,6 @@ public class Interpretador {
        catch(IOException e) {
            System.err.printf("Erro na leitura do arquilo %s\n", e.getMessage());
        }
-      return null;           
-   }
-   
-   private void interpreta(String line) throws FileNotFoundException {
-       
-       String novaLinha = lerLinha();
-       String OpCode;
-       System.out.println(novaLinha);
-       
-       OpCode = novaLinha.substring(0,3);
-       System.out.println(OpCode);
-       /*Começa a baguncinha*/
-       
-       
-       
-       
-       
-       
-       
-       
-       
    }
 
     /**
