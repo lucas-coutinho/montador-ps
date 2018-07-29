@@ -56,7 +56,7 @@ public class Macro {
                     aux = read.split("mcdef");
                     simbolo = aux[0].trim();
                     parametros = aux[1].trim();
-                    System.out.println(aux[0] + " " + aux[1]);
+                    //System.out.println(aux[0] + " " + aux[1]);
                     Integer j = new Integer(0);
                     for(int i = 0;;)
                     {
@@ -144,26 +144,26 @@ public class Macro {
                             aux[0] = aux[0].trim();
                             aux[1] = aux[1].trim();
 
-                            System.out.println(aux[0] + " " + aux[1]);
+                            //System.out.println(aux[0] + " " + aux[1]);
                             int i = 0;
                             int j = 0;
 
                             while(true)
                             {
                                 String s2;
-                                System.out.println(aux[1].indexOf(',',i));
+                               // System.out.println(aux[1].indexOf(',',i));
                                 if(aux[1].indexOf(',',i) != -1)
                                 {
                                     s2 = aux[1].substring(i,aux[1].indexOf(',',i) );
-                                    System.out.println(s2);
+                                   //System.out.println(s2);
                                     param.put(mapaDeParametros.get(s).get(j),s2);
                                     i = aux[1].indexOf(',',i) + 1;
-                                   System.out.println(i);
+                                   //System.out.println(i);
                                 }
                                 else 
                                 {
                                     s2 = aux[1].substring(i);
-                                    System.out.println(s2);
+                                    //System.out.println(s2);
                                     param.put(mapaDeParametros.get(s).get(j),s2);
                                     break;
                                 }

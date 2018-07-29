@@ -26,12 +26,12 @@ public class Hacks {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
-        String file = "C:\\Users\\Lucas Freitas\\Desktop\\teste.txt";
+        String file = "C:\\Users\\gabramos1\\Desktop\\teste.txt";
         
-        String fileInter = "C:\\Users\\Lucas Freitas\\Desktop\\testeMacro.txt";
-        String fileFinal = "C:\\Users\\Lucas Freitas\\Desktop\\testeLigador.txt";
+        String fileInter = "C:\\Users\\gabramos1\\Desktop\\testeMacro.txt";
+        String fileFinal = "C:\\Users\\gabramos1\\Desktop\\testeLigador.txt";
         String line ;
         List<String> intermediario;
         List<String> ligacoes;
@@ -39,6 +39,7 @@ public class Hacks {
         String[] code;
         code = new String[100];
         Montador montador;
+        Interpretador interpretador;
         Macro macro;
         int pc, i = 0;
         pc = 0;
@@ -80,7 +81,7 @@ public class Hacks {
                     //if(s.isEmpty()) intermediario.remove(intermediario.indexOf(s));
                     
                 }
-                 for(String s: intermediario) System.out.println(s);
+                 //for(String s: intermediario) System.out.println(s);
                 
                     try{
                         FileWriter arq = new FileWriter(fileInter);
@@ -114,7 +115,7 @@ public class Hacks {
             {
                 if(line.length() > 0 )
                 {
-                    System.out.println(line);
+                    //System.out.println(line);
                     montador.primeiroPasso(line, pc);
                     if(!line.contains("(")) pc += 2;
                 } 
@@ -139,7 +140,7 @@ public class Hacks {
             {
                 if(line.length() > 0 && !line.contains("(") )
                 {
-                    System.out.println(line);
+                    //System.out.println(line);
                     code[i++] = montador.traduzLinha(line);
                     
                 } 
@@ -155,7 +156,7 @@ public class Hacks {
         
         FileWriter write;
         try {
-            write = new FileWriter("C:\\Users\\Lucas Freitas\\Desktop\\testeResponse.txt");
+            write = new FileWriter("C:\\Users\\gabramos1\\Desktop\\testeResponse.txt");
             PrintWriter writeDoc = new PrintWriter(write);
            
            for(int j = 0;j < i;j++){writeDoc.println(code[j]);}
@@ -167,7 +168,7 @@ public class Hacks {
         }
         
        
-        
+        interpretador = new Interpretador("C:\\Users\\gabramos1\\Desktop\\testeResponse.txt", pc);
     }
  
 }
