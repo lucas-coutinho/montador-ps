@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.Object;
+import java.util.*;
 /**
  *
  * @author Lucas Freitas
@@ -23,6 +24,9 @@ public class Montador{
     private Map<String,String> assemblerDest;
     private String line;
     private String fileName;
+    private List<String> memVar;
+    
+    /*SETAR espaco de memoria para variaveis de 0 a 15 */
     
     public Montador(String fileName) {
         this.memoria = new HashMap<>();
@@ -31,6 +35,7 @@ public class Montador{
         this.assemblerDest = new HashMap<>();
         this.assemblerJump = new HashMap<>();
         this.fileName = fileName;
+        memVar = new ArrayList<>();
         iniciaAssembler();
     }
     
@@ -106,7 +111,30 @@ public class Montador{
            {
                 if(tabela.getSimboloEnd(line.substring(1)) == -1)
                 {
-                    return "0000000000000000";
+                    if(memVar.size() == 15) memVar.remove(0);
+                    if(memVar.contains(line.substring(1)))
+                    {
+                        Integer i;
+              
+                        i = memVar.indexOf(line.substring(1));
+                        
+                        key = Integer.toBinaryString(i);
+                        while(key.length() < 16) {key = "0" + key;}
+                       
+                    }
+                    else
+                    {
+                        memVar.add(line.substring(1));
+                        Integer i;
+              
+                        i = memVar.indexOf(line.substring(1));
+                        
+                        key = Integer.toBinaryString(i);
+                        while(key.length() < 16) {key = "0" + key;}
+  
+                    }
+                    
+                    
                 }
                 else
                 {

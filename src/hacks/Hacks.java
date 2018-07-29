@@ -46,7 +46,7 @@ public class Hacks {
         //macro  = new Macro(file);
         ligacoes = new ArrayList<>();
         ligacoes.add(file);
-        //ligacoes.add("C:\\Users\\Lucas Freitas\\Desktop\\teste2.txt");
+        ligacoes.add("C:\\Users\\Lucas Freitas\\Desktop\\teste2.txt");
         ligador = new Ligador(ligacoes, fileFinal);
         ligador.ligar();
         
