@@ -77,7 +77,7 @@ public class Montador{
                 key = line.substring(1);
                 if(isNumeric(key) == false)
                 {
-                    //System.out.println(key);
+                    System.out.println(key);
                     if(tabela.getSimboloEnd(key) == -1) tabela.inserirSimbolo(key, -1);
                 }// inserindo simbolo na tabela de simbolos
                 else

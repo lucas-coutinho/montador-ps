@@ -168,7 +168,7 @@ public class Hacks {
         }
         
        
-        interpretador = new Interpretador("C:\\Users\\gabramos1\\Desktop\\testeResponse.txt", pc);
+        interpretador = new Interpretador("C:\\Users\\gabramos1\\Desktop\\testeResponse.txt");
     }
  
 }

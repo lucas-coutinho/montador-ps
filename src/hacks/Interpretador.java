@@ -22,10 +22,9 @@ public class Interpretador {
     private int Reg_data;
     private int[] RAM;
     
-    public Interpretador(String codObjeto, int pc) throws FileNotFoundException {
+    public Interpretador(String codObjeto) throws FileNotFoundException {
         this.codObjeto = codObjeto;
-        this.Reg_pc = pc;
-        interpreta(codObjeto, Reg_pc);
+        interpreta(codObjeto);
     }
     
     public String lerLinha() throws FileNotFoundException {
@@ -45,15 +44,16 @@ public class Interpretador {
       return null;           
    }
    
-   private void interpreta(String line, int pc) throws FileNotFoundException {
+   private void interpreta(String line) throws FileNotFoundException {
        
        String novaLinha = lerLinha();
        String OpCode;
        System.out.println(novaLinha);
        
-       OpCode = novaLinha.substring(0,4);
+       OpCode = novaLinha.substring(0,3);
        System.out.println(OpCode);
        /*Começa a baguncinha*/
+       
        
        
        
