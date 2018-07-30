@@ -38,32 +38,67 @@ public class Interpretador {
            while(line != null)
            {
                 if(line.length() > 0 ) {
-                    System.out.println(line);
                     
                     /* Aqui começa o interpretador*/
+                    if("0".equals(line.substring(1))) {
+                        this.Reg_A = Integer.parseInt(line, 2);
+                        System.out.println(this.Reg_A);
+                    }
                     
-                    if("111".equals(line.substring(1, 3))) { // Indica que vai ser lido um valor para memória
-                        //RAM[this.Reg_A] = 0;
+                    else if("111".equals(line.substring(1, 3))) { // Indica que vai ser lido um valor para memória
+                        
                         switch(line.substring(4,10)){
                             case "0111111":
                                 RAM[this.Reg_A] = 1;
                                 break;
-                            
                             case "0101010":
                                 RAM[this.Reg_A] = 0;
                                 break;
-                            
                             case "0111010":
                                 RAM[this.Reg_A] = -1;
                                 break;
-                            
                             case "0001100":
-                                RAM[this.Reg_A] = Reg_data; 
+                                RAM[this.Reg_A] = Reg_data;
+                                break;
+                            case "0110000":
+                                RAM[this.Reg_A] = Reg_A;
+                                break;
+                            case "0001101":
+                                String aux = Integer.toBinaryString(Reg_data);
+                                aux = aux.replace('0','2').replace('1', '0').replace('2', '1');
+                                RAM[this.Reg_A] = Integer.parseInt(aux,2);
+                                break;
+                            case "0110001":
+                                aux = Integer.toBinaryString(Reg_A);
+                                aux = aux.replace('0','2').replace('1', '0').replace('2', '1');
+                                RAM[this.Reg_A] = Integer.parseInt(aux,2);
+                                break;
+                            case "0001111":
+                                RAM[this.Reg_A] = -Reg_data;
+                                break;
+                            case "0110011":
+                                RAM[this.Reg_A] = -Reg_A;
+                                break;
+                            case "0011111":
+                                RAM[this.Reg_A] = Reg_data + 1;
+                                break;
+                            case "0110111":
+                                RAM[this.Reg_A] = Reg_A + 1;
+                                break;
+                            case "0110010":
+                                RAM[this.Reg_A] = Reg_A - 1;
+                                break;
+                            case "0001110":
+                                RAM[this.Reg_A] = Reg_data - 1;
+                                break;
+                            case "0000010":
+                                RAM[this.Reg_A] = Reg_data + Reg_A;
+                                break;
+                            case "0010011":
+                                RAM[this.Reg_A] = Reg_data - Reg_A;
+                                break;
                         }
-                    }
-                    
-               
-                    
+                    }    
                 }
                   
    

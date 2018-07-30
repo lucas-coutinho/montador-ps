@@ -139,12 +139,12 @@ public class Montador{
                 else
                 {
 
-                 Integer i;
+                    Integer i;
 
-                 i = tabela.getSimboloEnd(line.substring(1));
-                 key = Integer.toBinaryString(i);
+                    i = tabela.getSimboloEnd(line.substring(1));
+                    key = Integer.toBinaryString(i);
 
-                 while(key.length() < 16) {key = "0" + key;}
+                    while(key.length() < 16) {key = "0" + key;}
                 }
            }
            
@@ -158,7 +158,7 @@ public class Montador{
             if(!line.contains("="))
             {
                // definindo qual o destino
-            //dest = qualDest(line.substring(0, line.indexOf('=')-1));
+               //dest = qualDest(line.substring(0, line.indexOf('=')-1));
                // definindo qual a opercao
                dest = "000";
                comp = assemblerComp.get(line.substring(0,line.indexOf(';')));
